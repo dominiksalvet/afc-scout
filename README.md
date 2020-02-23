@@ -1,4 +1,4 @@
-# \<project\>
+# afc-scout
 
 [![CI status](https://github.com/dominiksalvet/template/workflows/CI/badge.svg)](https://github.com/dominiksalvet/template/commits)
 [![standard-readme compliant](https://img.shields.io/badge/readme_style-standard-brightgreen.svg)](https://github.com/RichardLitt/standard-readme)
@@ -33,4 +33,4 @@ Do you want to contribute? Do you have any questions? Then the [*CONTRIBUTING.md
 
 ## License
 
-\<project\> is licensed under the [MIT License](LICENSE).
+Afc-scout is licensed under the [MIT License](LICENSE).

@@ -1,10 +1,10 @@
 # Contributing
 
-The development of \<project\> is published on [this website](https://github.com/dominiksalvet/template) and **everyone is welcome to contribute**.
+The development of afc-scout is published on [this website](https://github.com/dominiksalvet/template) and **everyone is welcome to contribute**.
 
 ## Suggestions and questions
 
-If you have any suggestions or questions about \<project\>, follow these steps:
+If you have any suggestions or questions about afc-scout, follow these steps:
 
 1. Make sure the same is not already reported in [issues](https://github.com/dominiksalvet/template/issues).
 2. Open a [new issue](https://github.com/dominiksalvet/template/issues/new/choose).
@@ -13,7 +13,7 @@ If you have any suggestions or questions about \<project\>, follow these steps:
 
 If you want to contribute directly, it may be a good idea to [create an issue](https://github.com/dominiksalvet/template/issues/new/choose) first to discuss it. Then follow the steps:
 
-1. [Fork](https://github.com/dominiksalvet/template/fork) \<project\>.
+1. [Fork](https://github.com/dominiksalvet/template/fork) afc-scout.
 2. Create a new branch with a descriptive name.
 3. Make your changes in the branch.
 4. Add notable changes to the [*CHANGELOG.md*](CHANGELOG.md) file.

@@ -1,9 +1,9 @@
 ---
 name: Question
-about: Ask a question about <project>
+about: Ask a question about afc-scout
 title: <question>
 labels: question
-assignees: <author>
+assignees: dominiksalvet
 ---
 
 **Additional context**

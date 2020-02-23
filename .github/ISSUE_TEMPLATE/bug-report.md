@@ -1,13 +1,13 @@
 ---
 name: Bug report
-about: Create a report to improve <project>
+about: Create a report to improve afc-scout
 title: ''
 labels: bug
-assignees: <author>
+assignees: dominiksalvet
 ---
 
 **Environment**
-State <project> version and OS information.
+State afc-scout version and OS information.
 
 **Description**
 Describe the bug.

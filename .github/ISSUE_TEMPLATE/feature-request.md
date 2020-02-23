@@ -1,9 +1,9 @@
 ---
 name: Feature request
-about: Suggest an idea for <project>
+about: Suggest an idea for afc-scout
 title: ''
 labels: enhancement
-assignees: <author>
+assignees: dominiksalvet
 ---
 
 **Description**
