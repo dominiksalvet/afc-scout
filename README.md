@@ -33,11 +33,25 @@ sudo gitpack install github.com/dominiksalvet/afc-scout
 
 ## Usage
 
-Usage content.
+To dump the most interesting ACPI address range, use:
+
+```
+sudo afc-scout
+```
+
+If you want to use your own address range, use:
+
+```
+sudo afc-scout <start> <end>
+```
 
 ### Example
 
-Example content.
+Demonstrated on UX430UA laptop to detect the ACPI fan base address based on the values characteristics.
+
+<p align="center">
+    <img src="img/example.png" alt="afc-scout example">
+</p>
 
 ## Contributing
 
