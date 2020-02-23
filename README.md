@@ -1,7 +1,3 @@
-**Do not install afc-scout yet. It is not completely prepared.**
-
----
-
 # afc-scout
 
 [![CI status](https://github.com/dominiksalvet/afc-scout/workflows/CI/badge.svg)](https://github.com/dominiksalvet/afc-scout/commits)
