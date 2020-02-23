@@ -1,6 +1,7 @@
 # afc-scout
 
 [![CI status](https://github.com/dominiksalvet/afc-scout/workflows/CI/badge.svg)](https://github.com/dominiksalvet/afc-scout/commits)
+[![GitPack](https://img.shields.io/badge/-GitPack-571997)](https://github.com/dominiksalvet/gitpack)
 [![standard-readme compliant](https://img.shields.io/badge/readme_style-standard-brightgreen.svg)](https://github.com/RichardLitt/standard-readme)
 
 > ACPI scout of asus-fan-control.
