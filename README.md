@@ -47,11 +47,11 @@ sudo afc-scout <start> <end>
 
 ### Example
 
-Demonstrated on UX430UA laptop to detect the ACPI fan base address based on the values characteristics.
-
 <p align="center">
     <img src="img/example.png" alt="afc-scout example">
 </p>
+
+This example has been demonstrated on the UX430UA laptop model to detect the ACPI fan base address based on the values characteristics. As you can see, the base ACPI fan address for this model is 1335 and there are 8 temperatures.
 
 ## Contributing
 
