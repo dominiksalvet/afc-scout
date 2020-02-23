@@ -28,7 +28,7 @@ done
 # CONSTANTS
 #-------------------------------------------------------------------------------
 
-readonly VERSION=0.1.0 # the current version of afc-scout
+readonly VERSION=1.0.0 # the current version of afc-scout
 
 readonly HELP_MESSAGE='USAGE:
   afc-scout [START END]
