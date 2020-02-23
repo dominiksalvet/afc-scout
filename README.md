@@ -1,6 +1,6 @@
 # afc-scout
 
-[![CI status](https://github.com/dominiksalvet/template/workflows/CI/badge.svg)](https://github.com/dominiksalvet/template/commits)
+[![CI status](https://github.com/dominiksalvet/afc-scout/workflows/CI/badge.svg)](https://github.com/dominiksalvet/afc-scout/commits)
 [![standard-readme compliant](https://img.shields.io/badge/readme_style-standard-brightgreen.svg)](https://github.com/RichardLitt/standard-readme)
 
 > Short description.
