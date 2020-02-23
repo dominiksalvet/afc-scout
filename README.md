@@ -24,10 +24,6 @@ This tool might be useful in those cases, which are referred to as advanced conf
 
 ## Install
 
-### Dependencies
-
-* **acpi_call** kernel module (see below)
-
 Afc-scout supports [GitPack](https://github.com/dominiksalvet/gitpack). Global installation/update:
 
 ```sh
@@ -35,6 +31,10 @@ sudo gitpack install github.com/dominiksalvet/afc-scout
 ```
 
 > If your system has `apt-get`, GitPack will install acpi_call automatically.
+
+### Dependencies
+
+* **acpi_call** kernel module (see above)
 
 ## Usage
 
