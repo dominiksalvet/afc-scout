@@ -1,0 +1,104 @@
+#!/bin/sh
+
+#-------------------------------------------------------------------------------
+# Copyright 2020 Dominik Salvet
+# github.com/dominiksalvet/afc-scout
+#-------------------------------------------------------------------------------
+# DESCRIPTION:
+#   This is the ACPI scout of asus-fan-control used for easier advanced
+#   configuration of new laptop devices.
+# PARAMETERS:
+#   All given arguments are processed as afc-scout's help describes.
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+# COMMANDS
+#-------------------------------------------------------------------------------
+
+# a list of required commands
+readonly COMMANDS='command echo [ cut'
+
+for command in $COMMANDS; do # check if any command is missing
+    if ! command -v "$command" > /dev/null; then
+        echo "missing $command command" >&2; exit 1
+    fi
+done
+
+#-------------------------------------------------------------------------------
+# CONSTANTS
+#-------------------------------------------------------------------------------
+
+readonly VERSION=0.1.0 # the current version of afc-scout
+
+readonly HELP_MESSAGE='USAGE:
+  afc-scout [START END]
+  afc-scout help | about'
+
+readonly ABOUT_MESSAGE="afc-scout $VERSION
+ACPI scout of asus-fan-control.
+
+Copyright 2020 Dominik Salvet
+github.com/dominiksalvet/afc-scout"
+
+# ACPI related constants
+readonly ACPI_CALL_PATH=/proc/acpi/call # entry point of ACPI calls
+readonly ACPI_READ_COMMAND='\_SB.PCI0.LPCB.EC0.RRAM' # read from ACPI command
+
+# configuration constants
+readonly DEFAULT_START_ADDR=0
+readonly DEFAUL_END_ADDR=4095
+
+#-------------------------------------------------------------------------------
+# HELP AND ABOUT
+#-------------------------------------------------------------------------------
+
+if [ "$1" = help ]; then
+    echo "$HELP_MESSAGE"; exit
+elif [ "$1" = about ]; then
+    echo "$ABOUT_MESSAGE"; exit
+fi
+
+#-------------------------------------------------------------------------------
+# CHECK ARGUMENTS
+#-------------------------------------------------------------------------------
+
+if [ "$#" -ne 0 ] && [ "$#" -ne 2 ]; then # check number of address arguments
+    echo 'invalid address arguments' >&2; exit 1
+fi
+
+if [ "$#" -eq 2 ]; then # if both address provided, check them
+    if ! [ "$1" -eq "$1" ] 2>/dev/null || [ "$1" -lt 0 ]; then # positive number
+        echo 'invalid start address' >&2; exit 1
+    fi
+    if ! [ "$2" -eq "$2" ] 2>/dev/null || [ "$2" -lt 0 ]; then # positive number
+        echo 'invalid end address' >&2; exit 1
+    fi
+fi
+
+#-------------------------------------------------------------------------------
+# CHECK ACPI
+#-------------------------------------------------------------------------------
+
+if [ ! -f "$ACPI_CALL_PATH" ]; then # check if ACPI interface file exists
+    echo "file $ACPI_CALL_PATH does not exist" >&2; exit 1
+fi
+
+id_out="$(id -u)" || exit # check if running as root
+if [ "$id_out" -ne 0 ]; then
+    echo 'root permissions needed' >&2; exit 1
+fi
+
+#-------------------------------------------------------------------------------
+# DUMP ACPI
+#-------------------------------------------------------------------------------
+
+addr="${1:-"$DEFAULT_START_ADDR"}" # initial address
+end_addr="${2:-"$DEFAUL_END_ADDR"}"
+
+while [ "$addr" -le "$end_addr" ]; do # respect maximum address limit
+    echo "$ACPI_READ_COMMAND $addr" > "$ACPI_CALL_PATH" && # ACPI read call
+    value="$(cut -c 1-4 "$ACPI_CALL_PATH")" && # parse value of the output
+    value="$((value))" && # convert from hexadecimal to decimal
+    echo "[$addr] = $value" && # print the address and its value
+    addr="$((addr + 1))" || exit # next address
+done
