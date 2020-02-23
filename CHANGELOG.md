@@ -7,3 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Unreleased
 
 The changes not yet present in any release are listed in this section.
+
+### Added
+
+* Added support for reading interesting ACPI address range.
+* Added support for reading ACPI values on custom address range.
