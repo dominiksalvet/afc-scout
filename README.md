@@ -16,6 +16,7 @@ This tool might be useful in those cases, which are referred to as advanced conf
   * [Dependencies](#dependencies)
 * [Usage](#usage)
   * [Example](#example)
+* [Thanks](#thanks)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -52,6 +53,10 @@ sudo afc-scout <start> <end>
 </p>
 
 This example has been demonstrated on the UX430UA laptop model to detect the ACPI fan base address based on the values characteristics. As you can see, the base ACPI fan address for this model is 1335 and there are 8 temperatures.
+
+## Thanks
+
+The core idea of afc-scout stands on [Kristian Klausen](https://github.com/klausenbusk)'s [effort](https://github.com/daringer/asus-fan/issues/44#issuecomment-517885072).
 
 ## Contributing
 
