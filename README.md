@@ -30,7 +30,7 @@ sudo gitpack install github.com/dominiksalvet/afc-scout
 
 ### Dependencies
 
-* [asus-fan-control](https://github.com/dominiksalvet/asus-fan-control)
+* **acpi_call** module (see [asus-fan-control](https://github.com/dominiksalvet/asus-fan-control))
 
 ## Usage
 
