@@ -60,8 +60,8 @@ The core idea of afc-scout stands on [Kristian Klausen](https://github.com/klaus
 
 ## Contributing
 
-Do you want to contribute? Do you have any questions? Then the [*CONTRIBUTING.md*](CONTRIBUTING.md) file is here for you.
+Do you want to contribute? Do you have any questions? Then the [*contributing.md*](contributing.md) file is here for you.
 
 ## License
 
-Afc-scout is licensed under the [MIT License](LICENSE).
+Afc-scout is licensed under the [MIT License](license).
