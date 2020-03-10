@@ -36,7 +36,7 @@ sudo gitpack install github.com/dominiksalvet/afc-scout
 
 To dump the most interesting ACPI address range, use:
 
-```
+```sh
 sudo afc-scout
 ```
 
