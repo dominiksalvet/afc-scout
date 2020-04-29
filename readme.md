@@ -16,6 +16,7 @@ This tool might be useful in those cases, which are referred to as advanced conf
   * [Dependencies](#dependencies)
 * [Usage](#usage)
   * [Example](#example)
+* [Questions](#questions)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -53,9 +54,13 @@ sudo afc-scout <start> <end>
 
 This example has been demonstrated on the UX430UA laptop model to detect the ACPI fan base address based on the values characteristics. As you can see, the base ACPI fan address might be 1335 with 8 temperatures (in fact it is).
 
+## Questions
+
+If you have any questions, you can find out how to get them answered in [*support.md*](support.md) file.
+
 ## Contributing
 
-Do you want to contribute? Do you have any questions? Then the [*contributing.md*](contributing.md) file is here for you.
+Do you want to contribute somehow? Then [*contributing.md*](contributing.md) file is here for you.
 
 ## License
 

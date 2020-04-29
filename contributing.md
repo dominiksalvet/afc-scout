@@ -2,9 +2,9 @@
 
 The development of afc-scout is published on [this website](https://github.com/dominiksalvet/afc-scout) and **everyone is welcome to contribute**.
 
-## Suggestions and questions
+## Suggestions
 
-If you have any suggestions or questions about afc-scout, follow these steps:
+If you have any suggestions or bug reports for afc-scout, follow these steps:
 
 1. Make sure the same is not already reported in [issues](https://github.com/dominiksalvet/afc-scout/issues).
 2. Open a [new issue](https://github.com/dominiksalvet/afc-scout/issues/new/choose).
