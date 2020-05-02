@@ -6,9 +6,9 @@
 
 > ACPI scout of asus-fan-control.
 
-This is the ACPI scout of [asus-fan-control](https://github.com/dominiksalvet/asus-fan-control). Once a new laptop model is to be added to asus-fan-control as tested, it may not work out of the box. The problem might be caused by a different base ACPI fan address as well as different number of temperatures from the default values.
+This is the ACPI scout of [asus-fan-control](https://github.com/dominiksalvet/asus-fan-control). Once a device is to be added to asus-fan-control as tested, something may not work out of the box. The problem is most likely caused by different ACPI fan addresses of a target device.
 
-This tool might be useful in those cases, which are referred to as advanced configuration in asus-fan-control. It helps to find the correct ACPI fan address of your device by dumping ACPI address ranges (everything is in decimal form). Then, you can watch carefully for any temperatures pattern and try to use asus-fan-control with the respective address.
+This tool is very useful in those cases, which are referred to as advanced configuration in asus-fan-control. It helps to find the correct ACPI fan addresses of a device by dumping ACPI address ranges. All output is in decimal form.
 
 ## Table of Contents
 
