@@ -33,7 +33,7 @@ readonly ACPI_READ_COMMAND='\_SB.PCI0.LPCB.EC0.RRAM' # read from ACPI command
 
 # configuration constants
 readonly DEFAULT_START_ADDR=0
-readonly DEFAUL_END_ADDR=4095
+readonly DEFAULT_END_ADDR=4095
 
 #-------------------------------------------------------------------------------
 # HELP AND ABOUT
@@ -50,7 +50,7 @@ fi
 #-------------------------------------------------------------------------------
 
 if [ "$#" -ne 0 ] && [ "$#" -ne 2 ]; then # check number of address arguments
-    echo 'invalid address arguments' >&2; exit 1
+    echo 'invalid number of addresses' >&2; exit 1
 fi
 
 if [ "$#" -eq 2 ]; then # if both address provided, check them
@@ -83,7 +83,7 @@ fi
 #-------------------------------------------------------------------------------
 
 addr="${1:-"$DEFAULT_START_ADDR"}" # initial address
-end_addr="${2:-"$DEFAUL_END_ADDR"}"
+end_addr="${2:-"$DEFAULT_END_ADDR"}"
 
 while [ "$addr" -le "$end_addr" ]; do # respect maximum address limit
     echo "$ACPI_READ_COMMAND $addr" > "$ACPI_CALL_PATH" && # ACPI read call
