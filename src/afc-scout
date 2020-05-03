@@ -32,8 +32,7 @@ readonly ACPI_CALL_PATH=/proc/acpi/call # entry point of ACPI calls
 readonly ACPI_READ_COMMAND='\_SB.PCI0.LPCB.EC0.RRAM' # read from ACPI command
 
 # configuration constants
-readonly BASE_ADDRS='1335 1431' # possible ACPI base fan addresses
-readonly TEMPS_COUNT=8 # default number of temperatures in one address range
+readonly NICE_RANGES='1335-1342 1431-1438' # possible fan address ranges
 
 #-------------------------------------------------------------------------------
 # GENERAL FUNCTIONS
@@ -52,15 +51,15 @@ read_acpi_value() (
 
 # DESCRIPTION:
 #   Beautifies given address and value so that they can be displayed to a user.
-#   If a marker is provided, it will print it as well.
+#   If a mark is provided, it will print it as well.
 # PARAMETERS:
 #   $1 - address
 #   $2 - value
-#   $3 - marker (optional)
+#   $3 - mark (optional)
 beautify_dump() {
-    if ! [ "$3" ]; then # without marker
+    if ! [ "$3" ]; then # without mark
         echo "[$1] = ${2}"
-    else # with marker
+    else # with mark
         echo "[$1] = ${2} <- $3"
     fi
 }
@@ -70,12 +69,12 @@ beautify_dump() {
 #-------------------------------------------------------------------------------
 
 # DESCRIPTION:
-#   Prints an unroll marker based on given current, start and end addresses.
+#   Prints a mark based on given current, possible start and end addresses.
 # PARAMETERS:
 #   $1 - current address
 #   $2 - possible start address
-#   $2 - possible end address
-get_unroll_marker() {
+#   $3 - possible end address
+get_nice_range_mark() {
     if [ "$1" -eq "$2" ]; then
         echo 'possible start'
     elif [ "$1" -eq "$3" ]; then
@@ -84,37 +83,42 @@ get_unroll_marker() {
 }
 
 # DESCRIPTION:
-#   Unrolls a given ACPI base address and beautifies the output.
+#   Prints a given interesting ACPI address range with additional leading and
+#   trailing addresses to see the values trend. It also prints useful marks.
 # PARAMETERS:
-#   $1 - base address
-unroll_base_addr() (
-    addr="$(($1 - 1))" && # start with a lower address
-    end_addr="$(($1 + TEMPS_COUNT))" && # prepare end address
-    end_marker_addr="$((end_addr - 1))" && # compute end marker address
+#   $1 - start address
+#   $2 - end address
+print_nice_range() (
+    addr="$(($1 - 1))" && # start with a lower address (one leading address)
+    max_addr="$(($2 + 1))" && # end with a higher address (one trailing address)
 
-    while [ "$addr" -le "$end_addr" ]; do # respect end address limit
+    while [ "$addr" -le "$max_addr" ]; do # respect maximum address limit
         value="$(read_acpi_value "$addr")" && # read value
-        marker="$(get_unroll_marker "$addr" "$1" "$end_marker_addr")" &&
-        beautify_dump "$addr" "$value" "$marker" &&
+        mark="$(get_nice_range_mark "$addr" "$1" "$2")" &&
+        beautify_dump "$addr" "$value" "$mark" &&
         addr="$((addr + 1))" || return # next address
     done
 )
 
 # DESCRIPTION:
-#   Unrolls all predefined ACPI base addresses and beautifies the output.
-unroll_base_addrs() (
-    for base_addr in $BASE_ADDRS; do
-        echo "------ base address $base_addr ------" && # line separator
-        unroll_base_addr "$base_addr" || return # unroll each base address
+#   Prints interesting ACPI address ranges and beautifies the output. It also
+#   prints the base address of each address range.
+print_nice_ranges() (
+    for nice_range in $NICE_RANGES; do # for each address range
+        start_addr="${nice_range%%-*}" && # range start address
+        end_addr="${nice_range##*-}" && # range end address
+
+        echo "------ base address $start_addr ------" && # line separator
+        print_nice_range "$start_addr" "$end_addr" || return
     done
 )
 
 # DESCRIPTION:
 #   Prints values between given ACPI addresses (included) in a decimal form.
 # PARAMETERS:
-#   $1 - address address
+#   $1 - start address
 #   $2 - end address
-get_acpi_values() (
+print_range() (
     addr="$1" # initial address
 
     while [ "$addr" -le "$2" ]; do # respect end address limit
@@ -153,7 +157,7 @@ fi
 
 # only no argument or two arguments are allowed
 if [ "$#" -eq 0 ]; then
-    unroll_base_addrs; exit # print beautified interesting address ranges
+    print_nice_ranges; exit # print beautified interesting address ranges
 elif [ "$#" -ne 2 ]; then
     echo 'invalid number of addresses' >&2; exit 1
 fi
@@ -169,4 +173,4 @@ if [ "$1" -gt "$2" ]; then # end address must not be less than start one
     echo 'start address is greater than end address' >&2; exit 1
 fi
 
-get_acpi_values "$1" "$2" # print custom address range
+print_range "$1" "$2" # print custom address range
