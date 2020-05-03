@@ -8,7 +8,7 @@
 
 This is the ACPI scout of [asus-fan-control](https://github.com/dominiksalvet/asus-fan-control). Once a device is to be added to asus-fan-control as tested, something may not work out of the box. The problem is most likely caused by different base ACPI fan addresses of a target device.
 
-This tool is very useful in those cases, which are referred to as advanced configuration in asus-fan-control. It helps to find the correct base addresses of a device by dumping ACPI address ranges. All output is in decimal form.
+This tool is very useful in those cases, which are referred to as advanced configuration in asus-fan-control. It helps to find the correct base addresses of a device by dumping ACPI address ranges. All numbers are in decimal form.
 
 ## Table of Contents
 
