@@ -34,7 +34,7 @@ sudo gitpack install github.com/dominiksalvet/afc-scout
 
 ## Usage
 
-To dump interesting ACPI address ranges **automatically**, use:
+To dump **interesting ACPI address ranges**, use:
 
 ```sh
 sudo afc-scout
