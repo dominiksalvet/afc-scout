@@ -6,9 +6,9 @@
 
 > ACPI scout of asus-fan-control.
 
-This is the ACPI scout of [asus-fan-control](https://github.com/dominiksalvet/asus-fan-control). Once a device is to be added to asus-fan-control as tested, something may not work out of the box. The problem is most likely caused by different ACPI fan addresses of a target device.
+This is the ACPI scout of [asus-fan-control](https://github.com/dominiksalvet/asus-fan-control). Once a device is to be added to asus-fan-control as tested, something may not work out of the box. The problem is most likely caused by different base ACPI fan addresses of a target device.
 
-This tool is very useful in those cases, which are referred to as advanced configuration in asus-fan-control. It helps to find the correct ACPI fan addresses of a device by dumping ACPI address ranges. All output is in decimal form.
+This tool is very useful in those cases, which are referred to as advanced configuration in asus-fan-control. It helps to find the correct base addresses of a device by dumping ACPI address ranges. All output is in decimal form.
 
 ## Table of Contents
 
@@ -34,7 +34,7 @@ sudo gitpack install github.com/dominiksalvet/afc-scout
 
 ## Usage
 
-To dump the most interesting ACPI address ranges, use:
+To dump the **most interesting ACPI address ranges**, use:
 
 ```sh
 sudo afc-scout
@@ -52,7 +52,9 @@ sudo afc-scout <start> <end>
     <img src="img/example.png" alt="afc-scout example">
 </p>
 
-This example has been demonstrated on the UX430UA laptop model to detect the ACPI fan base address based on the values characteristics. As you can see, the base ACPI fan address might be 1335 with 8 temperatures (in fact it is).
+This example has been demonstrated on the UX430UA laptop model to detect the base ACPI fan address based on the values characteristics. As you can see, the base address might be 1335 with 8 temperatures (in fact it is).
+
+> Note that the UX430UA model has only one base address as it has only one fan.
 
 ## Questions
 
