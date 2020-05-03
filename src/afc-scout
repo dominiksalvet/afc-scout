@@ -32,8 +32,97 @@ readonly ACPI_CALL_PATH=/proc/acpi/call # entry point of ACPI calls
 readonly ACPI_READ_COMMAND='\_SB.PCI0.LPCB.EC0.RRAM' # read from ACPI command
 
 # configuration constants
-readonly DEFAULT_START_ADDR=0
-readonly DEFAULT_END_ADDR=4095
+readonly BASE_ADDRS='1335 1431' # possible ACPI base fan addresses
+readonly TEMPS_COUNT=8 # default number of temperatures in one address range
+
+#-------------------------------------------------------------------------------
+# GENERAL FUNCTIONS
+#-------------------------------------------------------------------------------
+
+# DESCRIPTION:
+#   Prints a value of a given ACPI address in a decimal form.
+# PARAMETERS:
+#   $1 - address
+read_acpi_value() (
+    echo "$ACPI_READ_COMMAND ${1:?}" > "$ACPI_CALL_PATH" && # ACPI read call
+    value="$(cut -c 1-4 "$ACPI_CALL_PATH")" && # parse value of the output
+    value="$((value))" && # convert from hexadecimal to decimal
+    echo "$value" # print the final value
+)
+
+# DESCRIPTION:
+#   Beautifies given address and value so that they can be displayed to a user.
+#   If a marker is provided, it will print it as well.
+# PARAMETERS:
+#   $1 - address
+#   $2 - value
+#   $3 - marker (optional)
+beautify_dump() {
+    if ! [ "$3" ]; then # without marker
+        echo "[$1] = ${2}"
+    else # with marker
+        echo "[$1] = ${2} <- $3"
+    fi
+}
+
+#-------------------------------------------------------------------------------
+# DUMP FUNCTIONS
+#-------------------------------------------------------------------------------
+
+# DESCRIPTION:
+#   Prints an unroll marker based on given current, start and end addresses.
+# PARAMETERS:
+#   $1 - current address
+#   $2 - possible start address
+#   $2 - possible end address
+get_unroll_marker() {
+    if [ "$1" -eq "$2" ]; then
+        echo 'possible start'
+    elif [ "$1" -eq "$3" ]; then
+        echo 'possible end'
+    fi
+}
+
+# DESCRIPTION:
+#   Unrolls a given ACPI base address and beautifies the output.
+# PARAMETERS:
+#   $1 - base address
+unroll_base_addr() (
+    addr="$(($1 - 1))" && # start with a lower address
+    end_addr="$(($1 + TEMPS_COUNT))" && # prepare end address
+    end_marker_addr="$((end_addr - 1))" && # compute end marker address
+
+    while [ "$addr" -le "$end_addr" ]; do # respect end address limit
+        value="$(read_acpi_value "$addr")" && # read value
+        marker="$(get_unroll_marker "$addr" "$1" "$end_marker_addr")" &&
+        beautify_dump "$addr" "$value" "$marker" &&
+        addr="$((addr + 1))" || return # next address
+    done
+)
+
+# DESCRIPTION:
+#   Unrolls all predefined ACPI base addresses and beautifies the output.
+unroll_base_addrs() (
+    for base_addr in $BASE_ADDRS; do
+        echo "------ base address $base_addr ------" && # line separator
+        unroll_base_addr "$base_addr" || return # unroll each base address
+    done
+)
+
+# DESCRIPTION:
+#   Prints values between given ACPI addresses (included) in a decimal form.
+# PARAMETERS:
+#   $1 - address address
+#   $2 - end address
+get_acpi_values() (
+    addr="$1" # initial address
+
+    while [ "$addr" -le "$2" ]; do # respect end address limit
+        value="$(read_acpi_value "$addr")" && # read value
+        beautify_dump "$addr" "$value" && # print address and its value
+        addr="$((addr + 1))" || return # next address
+    done
+)
 
 #-------------------------------------------------------------------------------
 # HELP AND ABOUT
@@ -43,26 +132,6 @@ if [ "$1" = help ]; then
     echo "$HELP_MESSAGE"; exit
 elif [ "$1" = about ]; then
     echo "$ABOUT_MESSAGE"; exit
-fi
-
-#-------------------------------------------------------------------------------
-# CHECK ARGUMENTS
-#-------------------------------------------------------------------------------
-
-if [ "$#" -ne 0 ] && [ "$#" -ne 2 ]; then # check number of address arguments
-    echo 'invalid number of addresses' >&2; exit 1
-fi
-
-if [ "$#" -eq 2 ]; then # if both address provided, check them
-    if ! [ "$1" -eq "$1" ] 2>/dev/null || [ "$1" -lt 0 ]; then # positive number
-        echo 'invalid start address' >&2; exit 1
-    fi
-    if ! [ "$2" -eq "$2" ] 2>/dev/null || [ "$2" -lt 0 ]; then # positive number
-        echo 'invalid end address' >&2; exit 1
-    fi
-    if [ "$1" -gt "$2" ]; then # end address must not be smaller than start one
-        echo 'start address is greater than end address' >&2; exit 1
-    fi
 fi
 
 #-------------------------------------------------------------------------------
@@ -79,16 +148,25 @@ if [ "$id_out" -ne 0 ]; then
 fi
 
 #-------------------------------------------------------------------------------
-# DUMP ACPI
+# ARGUMENT PROCESSING
 #-------------------------------------------------------------------------------
 
-addr="${1:-"$DEFAULT_START_ADDR"}" # initial address
-end_addr="${2:-"$DEFAULT_END_ADDR"}"
+# only no argument or two arguments are allowed
+if [ "$#" -eq 0 ]; then
+    unroll_base_addrs; exit # print beautified interesting address ranges
+elif [ "$#" -ne 2 ]; then
+    echo 'invalid number of addresses' >&2; exit 1
+fi
 
-while [ "$addr" -le "$end_addr" ]; do # respect maximum address limit
-    echo "$ACPI_READ_COMMAND $addr" > "$ACPI_CALL_PATH" && # ACPI read call
-    value="$(cut -c 1-4 "$ACPI_CALL_PATH")" && # parse value of the output
-    value="$((value))" && # convert from hexadecimal to decimal
-    echo "[$addr] = $value" && # print the address and its value
-    addr="$((addr + 1))" || exit # next address
-done
+# check given address range
+if ! [ "$1" -ge 0 ] 2>/dev/null; then # positive number
+    echo 'invalid start address' >&2; exit 1
+fi
+if ! [ "$2" -ge 0 ] 2>/dev/null; then # positive number
+    echo 'invalid end address' >&2; exit 1
+fi
+if [ "$1" -gt "$2" ]; then # end address must not be less than start one
+    echo 'start address is greater than end address' >&2; exit 1
+fi
+
+get_acpi_values "$1" "$2" # print custom address range
