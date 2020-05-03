@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 The changes not yet present in any release are listed in this section.
 
+### Changed
+
+* Interesting address ranges are printed instead of dumping all when run without arguments.
+
 ### Removed
 
 * The check for existing commands has been removed as those are mandatory commands.
