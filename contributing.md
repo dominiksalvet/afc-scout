@@ -9,7 +9,7 @@ If you have any suggestions or bug reports for afc-scout, follow these steps:
 1. Make sure the same is not already reported in [issues](https://github.com/dominiksalvet/afc-scout/issues).
 2. Open a [new issue](https://github.com/dominiksalvet/afc-scout/issues/new/choose).
 
-## Pull requests
+## Pull Requests
 
 If you want to contribute directly, it may be a good idea to [create an issue](https://github.com/dominiksalvet/afc-scout/issues/new/choose) first to discuss it. Then follow the steps:
 
