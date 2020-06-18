@@ -58,11 +58,11 @@ This example has been demonstrated on the UX430UA laptop model to detect the bas
 
 ## Questions
 
-If you have any questions, you can find out how to get them answered in [*support.md*](support.md) file.
+If you have any questions, you can find out how to get them answered in [support.md](support.md) file.
 
 ## Contributing
 
-Do you want to contribute somehow? Then [*contributing.md*](contributing.md) file is here for you.
+Do you want to contribute somehow? Then [contributing.md](contributing.md) file is here for you.
 
 ## License
 
