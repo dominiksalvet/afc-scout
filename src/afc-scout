@@ -44,9 +44,22 @@ readonly NICE_RANGES='1335-1342 1431-1438' # possible fan address ranges
 #   $1 - address
 read_acpi_value() (
     echo "$ACPI_READ_COMMAND ${1:?}" > "$ACPI_CALL_PATH" && # ACPI read call
-    value="$(cut -c 1-4 "$ACPI_CALL_PATH")" && # parse value of the output
+    value="$(get_acpi_result)" && # retrieve the ACPI call result
+    value="$(echo "$value" | cut -c 1-4)" && # parse value of the output
     value="$((value))" && # convert from hexadecimal to decimal
     echo "$value" # print the final value
+)
+
+# DESCRIPTION:
+#   Reads and prints the previous ACPI call result, fails on detected errors.
+get_acpi_result() (
+    result="$(cat "$ACPI_CALL_PATH")" &&
+
+    if echo "$result" | grep -qi error; then
+        echo "acpi call failed with '$result'" >&2; return 1
+    else
+        echo "$result"
+    fi
 )
 
 # DESCRIPTION:
