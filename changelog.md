@@ -12,7 +12,7 @@ The changes not yet present in any release are listed in this section.
 
 ### Fixed
 
-* ACPI call errors now include the whole error output.
+* ACPI call errors now include the whole error description.
 
 ## 2.0.0 (2020-05-03)
 
