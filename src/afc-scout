@@ -2,7 +2,7 @@
 
 #-------------------------------------------------------------------------------
 # Copyright 2020 Dominik Salvet
-# github.com/dominiksalvet/afc-scout
+# https://github.com/dominiksalvet/afc-scout
 #-------------------------------------------------------------------------------
 # DESCRIPTION:
 #   This is the ACPI scout of asus-fan-control used for easier advanced
@@ -25,7 +25,7 @@ readonly ABOUT_MESSAGE="afc-scout $VERSION
 ACPI scout of asus-fan-control.
 
 Copyright 2020 Dominik Salvet
-github.com/dominiksalvet/afc-scout"
+https://github.com/dominiksalvet/afc-scout"
 
 # ACPI related constants
 readonly ACPI_CALL_PATH=/proc/acpi/call # entry point of ACPI calls
