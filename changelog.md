@@ -18,7 +18,7 @@ The changes not yet present in any release are listed in this section.
 
 ### Removed
 
-* Removed the support for local GitPack installation as it is useless.
+* Removed the support for local GitPack installation as it is unnecessary.
 
 ## 2.0.1 (2020-10-02)
 
