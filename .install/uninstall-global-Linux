@@ -1,0 +1,9 @@
+#!/bin/sh
+
+#-------------------------------------------------------------------------------
+# Copyright 2020 Dominik Salvet
+# https://github.com/dominiksalvet/afc-scout
+#-------------------------------------------------------------------------------
+
+echo 'removing files'
+rm -f /usr/local/bin/afc-scout

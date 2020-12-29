@@ -8,9 +8,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 The changes not yet present in any release are listed in this section.
 
+### Changed
+
+* Adapt to new GitPack 1.0.0 installation format.
+
 ### Fixed
 
 * Fixed `ignored null byte in input` warning occurring on some systems.
+
+### Removed
+
+* Removed the support for local GitPack installation as it is useless.
 
 ## 2.0.1 (2020-10-02)
 

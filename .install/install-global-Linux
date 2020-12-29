@@ -1,0 +1,10 @@
+#!/bin/sh
+
+#-------------------------------------------------------------------------------
+# Copyright 2020 Dominik Salvet
+# https://github.com/dominiksalvet/afc-scout
+#-------------------------------------------------------------------------------
+
+echo 'copying files'
+mkdir -p /usr/local/bin/ &&
+cp src/afc-scout /usr/local/bin/
