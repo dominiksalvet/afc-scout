@@ -33,6 +33,7 @@ sudo gitpack install github.com/dominiksalvet/afc-scout
 
 ### Dependencies
 
+* **systemd** suite
 * **acpi_call** module (see above)
 
 ## Usage

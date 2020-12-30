@@ -1,13 +1,15 @@
-#!/bin/sh
-
 #-------------------------------------------------------------------------------
 # Copyright 2020 Dominik Salvet
 # https://github.com/dominiksalvet/afc-scout
 #-------------------------------------------------------------------------------
 
-echo 'disabling systemd service'
-systemctl -q disable afc-scout.service
+[Unit]
+Description=Loads acpi_call module for afc-scout.
+Before=multi-user.target
 
-echo 'removing files'
-rm -f /usr/local/bin/afc-scout \
-      /etc/systemd/system/afc-scout.service
+[Service]
+Type=oneshot
+ExecStart=/sbin/modprobe acpi_call
+
+[Install]
+WantedBy=multi-user.target

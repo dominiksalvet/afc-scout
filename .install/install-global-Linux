@@ -11,5 +11,15 @@ if command -v apt-get > /dev/null; then
 fi &&
 
 echo 'copying files' &&
-mkdir -p /usr/local/bin/ &&
-cp src/afc-scout /usr/local/bin/
+mkdir -p /usr/local/bin/ \
+         /etc/systemd/system/ &&
+cp src/afc-scout /usr/local/bin/ &&
+cp .install/afc-scout.service /etc/systemd/system/ || exit
+
+echo 'enabling systemd service'
+systemctl -q enable afc-scout.service # may fail
+
+echo 'loading acpi_call module first time'
+modprobe acpi_call # may fail
+
+true # optional execution always succeeds

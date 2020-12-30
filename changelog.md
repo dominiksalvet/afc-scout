@@ -12,6 +12,7 @@ The changes not yet present in any release are listed in this section.
 
 * Adapt to new GitPack 1.0.0 installation format.
 * The acpi_call module is installed automatically on systems with APT.
+* The acpi_call module is loaded on system boots using a systemd service.
 
 ### Fixed
 
