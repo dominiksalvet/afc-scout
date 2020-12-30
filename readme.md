@@ -29,9 +29,11 @@ Afc-scout supports [GitPack](https://github.com/dominiksalvet/gitpack). Global i
 sudo gitpack install github.com/dominiksalvet/afc-scout
 ```
 
+> If your system has APT, GitPack will install acpi_call automatically.
+
 ### Dependencies
 
-* **acpi_call** module (see [asus-fan-control](https://github.com/dominiksalvet/asus-fan-control))
+* **acpi_call** module (see above)
 
 ## Usage
 

@@ -5,6 +5,11 @@
 # https://github.com/dominiksalvet/afc-scout
 #-------------------------------------------------------------------------------
 
-echo 'copying files'
+if command -v apt-get > /dev/null; then
+    echo 'installing acpi-call-dkms package'
+    apt-get install -y acpi-call-dkms > /dev/null
+fi &&
+
+echo 'copying files' &&
 mkdir -p /usr/local/bin/ &&
 cp src/afc-scout /usr/local/bin/
