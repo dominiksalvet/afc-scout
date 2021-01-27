@@ -1,13 +1,13 @@
 #!/bin/sh
 
 #-------------------------------------------------------------------------------
-# Copyright 2020 Dominik Salvet
+# Copyright 2020-2021 Dominik Salvet
 # https://github.com/dominiksalvet/afc-scout
 #-------------------------------------------------------------------------------
 
-echo 'disabling systemd service'
+echo 'disabling systemd service' &&
 systemctl -q disable afc-scout.service
 
-echo 'removing files'
+echo 'removing files' &&
 rm -f /usr/local/bin/afc-scout \
       /etc/systemd/system/afc-scout.service

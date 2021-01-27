@@ -1,12 +1,12 @@
 #!/bin/sh
 
 #-------------------------------------------------------------------------------
-# Copyright 2020 Dominik Salvet
+# Copyright 2020-2021 Dominik Salvet
 # https://github.com/dominiksalvet/afc-scout
 #-------------------------------------------------------------------------------
 
 if command -v apt-get > /dev/null; then
-    echo 'installing acpi-call-dkms package'
+    echo 'installing acpi-call-dkms package' &&
     apt-get install -y acpi-call-dkms > /dev/null
 fi &&
 
@@ -16,10 +16,10 @@ mkdir -p /usr/local/bin/ \
 cp src/afc-scout /usr/local/bin/ &&
 cp .install/afc-scout.service /etc/systemd/system/ || exit
 
-echo 'enabling systemd service'
+echo 'enabling systemd service' &&
 systemctl -q enable afc-scout.service # may fail
 
-echo 'loading acpi_call module first time'
+echo 'loading acpi_call module first time' &&
 modprobe acpi_call # may fail
 
 true # optional execution always succeeds
