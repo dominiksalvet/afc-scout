@@ -27,6 +27,17 @@ ACPI scout of asus-fan-control
 Copyright 2020-2022 Dominik Salvet
 https://github.com/dominiksalvet/afc-scout"
 
+readonly NICE_RANGES_MESSAGE='/------------------------------------------------------------------------------\
+|                                                                              |
+|   The following output represents values read from selected ACPI address     |
+|   ranges on your device. The address ranges are static and were chosen       |
+|   based on typical addresses of devices tested in AFC project. If the read   |
+|   values resemble a sequence of increasing temperatures, they might          |
+|   describe a fan speed curve.                                                |
+|                                                                              |
+\------------------------------------------------------------------------------/
+'
+
 # ACPI related constants
 readonly ACPI_CALL_PATH=/proc/acpi/call # entry point of ACPI calls
 readonly ACPI_READ_COMMAND='\_SB.PCI0.LPCB.EC0.RRAM' # read from ACPI command
@@ -73,7 +84,7 @@ beautify_dump() {
     if ! [ "$3" ]; then # without mark
         echo "[$1] = ${2}"
     else # with mark
-        echo "[$1] = ${2} <- $3"
+        echo "[$1] = ${2} <-- $3"
     fi
 }
 
@@ -89,9 +100,9 @@ beautify_dump() {
 #   $3 - possible end address
 get_nice_range_mark() {
     if [ "$1" -eq "$2" ]; then
-        echo 'possible start'
+        echo 'typical start'
     elif [ "$1" -eq "$3" ]; then
-        echo 'possible end'
+        echo 'typical end'
     fi
 }
 
@@ -117,6 +128,7 @@ print_nice_range() (
 #   Prints interesting ACPI address ranges and beautifies the output. It also
 #   prints the base address of each address range.
 print_nice_ranges() (
+    echo "$NICE_RANGES_MESSAGE" >&2
     for nice_range in $NICE_RANGES; do # for each address range
         start_addr="${nice_range%%-*}" && # range start address
         end_addr="${nice_range##*-}" && # range end address
