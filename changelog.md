@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 The changes not yet present in any release are listed in this section.
 
+## 2.1.1 (2026-02-05)
+
+### Changed
+
+* Changed nice address ranges printing to clarify what is the output.
+
 ## 2.1.0 (2021-02-11)
 
 ### Changed
